@@ -1,13 +1,29 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+import './assets/scss/init.scss';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+      <div className="wrapper">
+        <div className="header"></div>
+        <div className="body">
+          <div className="chat">
+
+          </div>
+          <div className="compose">
+            <div className="compose__inner">
+              <div className="compose__input"></div>
+              <div className="compose__send"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+    /*<>
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -28,7 +44,7 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-    </>
+    </>*/
   )
 }
 

@@ -2,26 +2,14 @@ import {useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './assets/scss/init.scss';
+import {ChatBot} from "./modules/ChatBot";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <div className="wrapper">
-        <div className="header"></div>
-        <div className="body">
-          <div className="chat">
-
-          </div>
-          <div className="compose">
-            <div className="compose__inner">
-              <div className="compose__input"></div>
-              <div className="compose__send"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ChatBot />
     </>
     /*<>
       <div>

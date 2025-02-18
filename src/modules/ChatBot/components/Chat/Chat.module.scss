@@ -1,0 +1,15 @@
+@use "@/assets/scss/variables" as global_vars;
+
+.root {
+  width: 60%;
+  height: 80%;
+  border-radius: global_vars.$border-radius-default;
+  background-color: global_vars.$main-black-light;
+  padding: 3rem;
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+}

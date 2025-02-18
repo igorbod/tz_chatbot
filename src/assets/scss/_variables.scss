@@ -3,8 +3,10 @@
 /* Colors */
 $black: #000000;
 $white: #ffffff;
-$main-black: #151515;
-$main-black-light: #454545;
+$main-black: #18181b;
+$main-black-light: #36353f;
+$main-black-lighter: #454451;
+$accent-main: #5645ee;
 
 $txt-white: #EEEEEE;
 $txt-gray: #C9C9C9;
@@ -13,3 +15,6 @@ $txt-placeholder: #909090;
 
 /* Fonts */
 $font-default: "Roboto", sans-serif;
+
+/* Other */
+$border-radius-default: 1.2rem;

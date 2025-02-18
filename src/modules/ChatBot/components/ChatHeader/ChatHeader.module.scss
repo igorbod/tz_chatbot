@@ -1,0 +1,18 @@
+@use "@/assets/scss/variables" as global_vars;
+
+.root {
+  width: 100%;
+  border-bottom: .1rem solid global_vars.$main-black-lighter;
+  padding-bottom: 1rem;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
+  &__title {
+    font-size: 1.8rem;
+    line-height: 1;
+    font-weight: 500;
+    color: global_vars.$txt-gray;
+  }
+}

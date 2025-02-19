@@ -4,8 +4,13 @@ import {API_ROUTES} from "@/constants/api";
 import {$api} from "@/api/api";
 import {DELAYS} from "@/constants/main";
 import {CUID} from "@/constants/localStorage";
-import {setIsLoading, setLoadingMessage} from "../chatSlice";
-import {CHAT_TITLES} from "@/modules/ChatBot/constants";
+import {
+  setIsComposeAvailable,
+  setIsLoading,
+  setLoadingMessage,
+} from "../chatSlice";
+import {eventChat} from "./chatEvent";
+import {EVENTS_ID} from "../../../../constants/api";
 
 const slicePrefix = SLICES_NAMES.CHAT
 
@@ -22,20 +27,26 @@ export const initChat = createAsyncThunk(
     const url = API_ROUTES.INIT.route
 
     dispatch(setIsLoading(true))
+    dispatch(setIsComposeAvailable(false))
 
-    return setTimeout(() => {
-      $api
+    return setTimeout(async () => {
+      await $api
         .post(`${url}`, _args)
         .then((response) => {
           if (response.status === 200 && response?.data?.result) {
             localStorage.setItem(CUID, response?.data?.result?.cuid)
           }
+          dispatch(eventChat({
+            cuid: response?.data?.result?.cuid,
+            euid: EVENTS_ID.READY,
+          }))
         })
         .catch((error) => {
           console.error(error);
         })
         .finally(() => {
           dispatch(setIsLoading(false))
+          dispatch(setIsComposeAvailable(true))
         })
     }, DELAYS.DEFAULT)
   }

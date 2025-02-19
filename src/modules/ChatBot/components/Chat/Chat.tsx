@@ -8,13 +8,13 @@ import {
   chatMessages,
   chatLoadingMessage,
   chatIsLoading,
+  isComposeAvailable,
 } from "@/store/reducers/chat/selectors";
 import {initChat} from "@/store/reducers/chat/thunks/chatInit";
 import {UUID} from "@/constants/api";
 import { classNames } from "@/helpers";
 import Loader from "@/components/ui/Loader/Loader";
-import {CHAT_TITLES} from "../../constants";
-
+import {requestChat} from "@/store/reducers/chat/thunks/chatRequest";
 
 interface IChat {
   isVisible?: boolean;
@@ -25,6 +25,7 @@ const Chat: FC<IChat> = () => {
   const dispatch = useAppDispatch();
   const messages = useAppSelector(chatMessages);
   const isChatLoading = useAppSelector(chatIsLoading);
+  const isComposeFunctionalityAvailable = useAppSelector(isComposeAvailable) && !isChatLoading;
   const chatLoaderMessage = useAppSelector(chatLoadingMessage);
 
   useEffect(() => {
@@ -35,8 +36,15 @@ const Chat: FC<IChat> = () => {
     }))
   }, [])
 
-  const onCompose = () => {
-    console.log('Click compose')
+  const onCompose = (composeTextValue: string) => {
+    if (composeTextValue.trim().length === 0) return
+
+    console.log('Click compose - ', composeTextValue)
+
+    dispatch(requestChat({
+      cuid: localStorage.getItem('chatCUID') ?? '',
+      text: composeTextValue,
+    }))
   }
 
   const chatClasses = classNames([cls.root, isChatLoading ? cls.root_loading : ''])
@@ -56,6 +64,7 @@ const Chat: FC<IChat> = () => {
         <ChatList messages={messages} />
         <ChatCompose
           onCompose={onCompose}
+          isComposeAvailable={isComposeFunctionalityAvailable}
         />
       </div>
     </div>

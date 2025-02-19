@@ -1,16 +1,20 @@
 import Button from "@/components/ui/Button/Button";
 import cls from "./ChatCompose.module.scss";
-import {FC} from "react";
+import {FC, useState} from "react";
 
 interface IChatCompose {
-  onCompose?: () => void;
+  isComposeAvailable: boolean;
+  onCompose: (value: string) => void;
 }
 
 const ChatCompose: FC<IChatCompose> = (props) => {
 
-    const {
-      onCompose
-    } = props
+  const [composeTextValue, setComposeTextValue] = useState('')
+
+  const {
+    isComposeAvailable = false,
+    onCompose
+  } = props
 
   return (
     <div className={cls.root}>
@@ -22,11 +26,16 @@ const ChatCompose: FC<IChatCompose> = (props) => {
             className={cls.root__input}
             name="compose_input"
             id="compose_input"
+            value={composeTextValue}
+            onInput={(e) => setComposeTextValue(e.currentTarget.value)}
+            autoComplete="off"
           />
           <Button
             buttonTitle="Send"
             customClasses={[cls.root__sendButton]}
-            onClick={onCompose}
+            onClick={() => onCompose(composeTextValue)}
+            disabled={!isComposeAvailable}
+            isLoading={!isComposeAvailable}
           />
         </label>
       </div>

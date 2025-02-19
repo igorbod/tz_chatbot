@@ -4,20 +4,22 @@ import {API_ROUTES} from "@/constants/api";
 import {$api} from "@/api/api";
 import {DELAYS} from "@/constants/main";
 import {CUID} from "@/constants/localStorage";
-import {setIsComposeAvailable} from "../chatSlice";
+import {
+  setIsComposeAvailable,
+} from "../chatSlice";
 
 const slicePrefix = SLICES_NAMES.CHAT
 
-interface IChatRequestParams {
-  text: string;
+interface IChatEventParams {
   cuid: string;
+  euid: string;
   context?: {},
 }
 
-export const requestChat = createAsyncThunk(
-  slicePrefix + '/requestChat',
-  (_args: IChatRequestParams, thunkAPI) => {
-    const url = API_ROUTES.REQUEST.route
+export const eventChat = createAsyncThunk(
+  slicePrefix + '/eventChat',
+  (_args: IChatEventParams, thunkAPI) => {
+    const url = API_ROUTES.EVENT.route
     const dispatch = thunkAPI.dispatch;
 
     dispatch(setIsComposeAvailable(false))

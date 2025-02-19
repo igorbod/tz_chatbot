@@ -20,6 +20,27 @@ body {
   margin: 0;
 }
 
+*,
+html *
+{
+  scrollbar-width: thin;
+  scrollbar-color: vars.$custom-scrollbar-pointer vars.$custom-scrollbar-bg;
+}
+
+/* Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+*::-webkit-scrollbar-track {
+  background: vars.$custom-scrollbar-bg;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: vars.$custom-scrollbar-pointer;
+  border-radius: .5rem;
+  border: .3rem solid vars.$custom-scrollbar-bg;
+}
+
 #root {
   position: relative;
   display: flex;
@@ -27,4 +48,5 @@ body {
   justify-content: center;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }

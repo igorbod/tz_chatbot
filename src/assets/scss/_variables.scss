@@ -7,6 +7,8 @@ $main-black: #18181b;
 $main-black-light: #36353f;
 $main-black-lighter: #454451;
 $accent-main: #5645ee;
+$accent-main-hover: #665cf6;
+$accent-owner: #463f83;
 
 $txt-white: #EEEEEE;
 $txt-gray: #C9C9C9;
@@ -16,5 +18,10 @@ $txt-placeholder: #909090;
 /* Fonts */
 $font-default: "Roboto", sans-serif;
 
+/* Scrollbar */
+$custom-scrollbar-bg: transparent;
+$custom-scrollbar-pointer: $txt-gray;
+
 /* Other */
 $border-radius-default: 1.2rem;
+$box-shadow-inner: inset 0 0 1rem rgba(0,0,0,0.9);

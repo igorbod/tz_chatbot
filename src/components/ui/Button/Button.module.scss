@@ -1,0 +1,31 @@
+@use "@/assets/scss/variables" as global_vars;
+
+.root {
+  position: relative;
+  background-color: global_vars.$accent-main;
+  border-radius: 1.2rem;
+  border: none;
+  transition: background-color ease .3s;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+
+  &:hover {
+    background-color: global_vars.$accent-main-hover;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem 2rem;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    line-height: 1;
+    font-weight: 500;
+    color: global_vars.$txt-white;
+  }
+}

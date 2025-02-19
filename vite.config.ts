@@ -5,15 +5,11 @@ import {createHash} from "node:crypto";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [react()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      '@assets': path.resolve(__dirname, './src/assets'),
-      '@types': path.resolve(__dirname, './src/types'),
-      '@components': path.resolve(__dirname, './src/components'),
-      '@modules': path.resolve(__dirname, './src/modules'),
-      '@constants': path.resolve(__dirname, './src/constants'),
     }
   },
   build: {

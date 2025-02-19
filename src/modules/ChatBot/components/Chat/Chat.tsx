@@ -1,8 +1,11 @@
 import cls from "./Chat.module.scss";
-import {FC} from "react";
-import ChatHeader from "../ChatHeader/ChatHeader.tsx";
-import ChatList from "@modules/ChatBot/components/ChatList/ChatList";
-import ChatCompose from "@modules/ChatBot/components/ChatCompose/ChatCompose";
+import {FC, useEffect} from "react";
+import ChatHeader from "../ChatHeader/ChatHeader";
+import ChatList from "../ChatList/ChatList";
+import ChatCompose from "../ChatCompose/ChatCompose";
+import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
+import {chatMessages} from "@/store/reducers/chat/selectors";
+
 
 interface IChat {
   isVisible?: boolean;
@@ -10,9 +13,12 @@ interface IChat {
 
 const Chat: FC<IChat> = () => {
 
-  /*const {
-    isVisible = false,
-  } = props*/
+  const dispatch = useAppDispatch();
+  const messages = useAppSelector(chatMessages);
+
+  useEffect(() => {
+
+  }, [])
 
   const onCompose = () => {
     console.log('Click compose')
@@ -24,7 +30,7 @@ const Chat: FC<IChat> = () => {
         <ChatHeader
           title="AI Chatbot Jarvis"
         />
-        <ChatList />
+        <ChatList messages={messages} />
         <ChatCompose
           onCompose={onCompose}
         />

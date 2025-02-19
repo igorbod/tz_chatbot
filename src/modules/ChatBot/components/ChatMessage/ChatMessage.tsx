@@ -1,7 +1,7 @@
 import cls from "./ChatMessage.module.scss";
 import {FC} from "react";
-import {IChatMessage} from "../../types/IChatMessage";
-import {getRandomIntInclusive} from "../../../../helpers";
+import { getRandomIntInclusive } from "@/helpers";
+import { IChatMessage } from "@/types/IChatMessage";
 
 const ChatMessage: FC<IChatMessage> = (props) => {
 

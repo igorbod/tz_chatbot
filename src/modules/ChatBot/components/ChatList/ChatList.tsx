@@ -1,10 +1,11 @@
 import cls from "./ChatList.module.scss";
 import {FC} from "react";
-import {getRandomIntInclusive} from "../../../../helpers";
 import ChatMessage from "../ChatMessage/ChatMessage";
+import { getRandomIntInclusive } from "@/helpers";
+import {IChatMessage} from "@/types/IChatMessage";
 
 interface IChatList {
-  messages: any;
+  messages: IChatMessage[];
 }
 
 const ChatList: FC<IChatList> = (props) => {

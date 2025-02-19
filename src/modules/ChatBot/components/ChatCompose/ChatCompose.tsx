@@ -1,6 +1,6 @@
+import Button from "@/components/ui/Button/Button";
 import cls from "./ChatCompose.module.scss";
 import {FC} from "react";
-import Button from "@components/ui/Button/Button";
 
 interface IChatCompose {
   onCompose?: () => void;

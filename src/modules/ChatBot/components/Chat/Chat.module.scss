@@ -7,6 +7,18 @@
   background-color: global_vars.$main-black-light;
   padding: 3rem;
 
+  &_loading {
+    .root__inner {
+      opacity: .75;
+      pointer-events: none;
+    }
+  }
+
+
+  .root_loading {
+
+  }
+
   &__inner {
     display: flex;
     flex-direction: column;

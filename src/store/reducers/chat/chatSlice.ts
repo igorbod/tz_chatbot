@@ -8,6 +8,8 @@ import {initChat} from "./thunks/chatInit";
 import {eventChat} from "./thunks/chatEvent";
 import {requestChat} from "./thunks/chatRequest";
 import {BOT_DEFAULT_AVATAR} from "@/constants/mock";
+import { toast } from "react-toastify";
+import {DEFAULT_MESSAGES} from "@/constants/messages";
 
 interface IChatState {
   messages: IChatMessage[];
@@ -110,6 +112,7 @@ export const mainSlice = createSlice({
         state.isLoading = false
         state.isComposeAvailable = true
         state.isChatInitialized = false
+        toast.error(action?.payload?.message ?? DEFAULT_MESSAGES.ERROR)
       })
 
       /* EVENT CHAT */
@@ -134,8 +137,9 @@ export const mainSlice = createSlice({
         }
         state.isComposeAvailable = true
       })
-      .addCase(eventChat.rejected, state => {
+      .addCase(eventChat.rejected, (state, action) => {
         state.isComposeAvailable = true
+        toast.error(action?.payload?.message ?? DEFAULT_MESSAGES.ERROR)
       })
 
     /* REQUEST CHAT */
@@ -161,8 +165,8 @@ export const mainSlice = createSlice({
         state.isComposeAvailable = true
       })
       .addCase(requestChat.rejected, (state, action) => {
-        console.log('initChat.rejected - ', action)
         state.isComposeAvailable = true
+        toast.error(action?.payload?.message ?? DEFAULT_MESSAGES.ERROR)
       })
   },
 })

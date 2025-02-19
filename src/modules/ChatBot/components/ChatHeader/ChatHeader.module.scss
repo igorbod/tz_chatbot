@@ -10,9 +10,18 @@
     align-items: center;
   }
   &__title {
+    flex-grow: 1;
     font-size: 1.8rem;
     line-height: 1;
     font-weight: 500;
     color: global_vars.$txt-gray;
+  }
+  &__controls {
+    display: flex;
+    align-items: center;
+    grid-row-gap: 1rem;
+  }
+  &__clearButton {
+    padding: 1rem;
   }
 }

@@ -11,7 +11,8 @@ import {
   isComposeAvailable,
 } from "@/store/reducers/chat/selectors";
 import {initChat} from "@/store/reducers/chat/thunks/chatInit";
-import {UUID} from "@/constants/api";
+import {eventChat} from "@/store/reducers/chat/thunks/chatEvent";
+import {EVENTS_ID, UUID} from "@/constants/api";
 import { classNames } from "@/helpers";
 import Loader from "@/components/ui/Loader/Loader";
 import {requestChat} from "@/store/reducers/chat/thunks/chatRequest";
@@ -21,12 +22,9 @@ import {
 import {
   USER_DEFAULT_AVATAR,
 } from "@/constants/mock";
+import { MESSAGES } from "@/constants/localStorage";
 
-interface IChat {
-  isVisible?: boolean;
-}
-
-const Chat: FC<IChat> = () => {
+const Chat: FC = () => {
 
   const dispatch = useAppDispatch();
   const messages = useAppSelector(chatMessages);
@@ -36,18 +34,29 @@ const Chat: FC<IChat> = () => {
 
   useEffect(() => {
     const cuid = localStorage.getItem('chatCUID') ?? ''
-    dispatch(initChat({
-      uuid: UUID,
-      cuid,
-    }))
+
+    const tryInitChat = async () => {
+      await dispatch(initChat({
+        uuid: UUID,
+        cuid,
+      }))
+    }
+
+    tryInitChat()
+      .then(() => {
+        if (!localStorage.getItem(MESSAGES)) {
+          dispatch(eventChat({
+            cuid: localStorage.getItem('chatCUID') ?? '',
+            euid: EVENTS_ID.READY,
+          }))
+        }
+      })
   }, [])
 
   const onCompose = (composeTextValue: string) => {
-    let newTime = new Date().getTime()
-
     dispatch(addNewMessage({
       id: window.crypto.randomUUID(),
-      time: newTime,
+      time: new Date().getTime(),
       username: 'You',
       message: composeTextValue,
       isOwner: true,
@@ -57,7 +66,6 @@ const Chat: FC<IChat> = () => {
     dispatch(requestChat({
       cuid: localStorage.getItem('chatCUID') ?? '',
       text: composeTextValue,
-      messageID: newTime,
     }))
   }
 

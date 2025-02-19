@@ -1,7 +1,9 @@
 import Button from "@/components/ui/Button/Button";
 import cls from "./ChatCompose.module.scss";
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import * as React from "react";
+import { chatIsInitialized } from "@/store/reducers/chat/selectors";
+import { useAppSelector } from "@/hooks/redux";
 
 interface IChatCompose {
   isComposeAvailable: boolean;
@@ -11,11 +13,16 @@ interface IChatCompose {
 const ChatCompose: FC<IChatCompose> = (props) => {
 
   const [composeTextValue, setComposeTextValue] = useState('')
+  const isChatInit = useAppSelector(chatIsInitialized)
 
   const {
     isComposeAvailable = false,
     onCompose
   } = props
+
+  useEffect(() => {
+    setComposeTextValue('')
+  }, [isChatInit])
 
   const sendValidatedMessage = () => {
     const trimmedComposeValue = composeTextValue.trim();

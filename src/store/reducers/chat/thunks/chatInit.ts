@@ -5,9 +5,9 @@ import {$api} from "@/api/api";
 import {DELAYS} from "@/constants/main";
 import {CUID} from "@/constants/localStorage";
 import {
+  setBotInfo,
   setIsComposeAvailable,
   setIsLoading,
-  setLoadingMessage,
 } from "../chatSlice";
 import {eventChat} from "./chatEvent";
 import {EVENTS_ID} from "../../../../constants/api";
@@ -35,6 +35,7 @@ export const initChat = createAsyncThunk(
         .then((response) => {
           if (response.status === 200 && response?.data?.result) {
             localStorage.setItem(CUID, response?.data?.result?.cuid)
+            dispatch(setBotInfo(response?.data?.result?.inf?.name))
           }
           dispatch(eventChat({
             cuid: response?.data?.result?.cuid,

@@ -1,6 +1,7 @@
 export interface IChatMessage {
-  time?: Date;
-  message?: string;
+  id: string;
+  time: number;
+  message: string;
   userAvatar?: string;
   username?: string;
   isOwner?: boolean;

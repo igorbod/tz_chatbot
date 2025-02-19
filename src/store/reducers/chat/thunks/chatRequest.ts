@@ -4,7 +4,12 @@ import {API_ROUTES} from "@/constants/api";
 import {$api} from "@/api/api";
 import {DELAYS} from "@/constants/main";
 import {CUID} from "@/constants/localStorage";
-import {setIsComposeAvailable} from "../chatSlice";
+import {
+  setIsComposeAvailable,
+  addNewMessage,
+} from "../chatSlice";
+import { RootState } from "@/store/store";
+import {BOT_DEFAULT_AVATAR} from "@/constants/mock";
 
 const slicePrefix = SLICES_NAMES.CHAT
 
@@ -12,6 +17,7 @@ interface IChatRequestParams {
   text: string;
   cuid: string;
   context?: {},
+  messageID: number;
 }
 
 export const requestChat = createAsyncThunk(
@@ -19,6 +25,7 @@ export const requestChat = createAsyncThunk(
   (_args: IChatRequestParams, thunkAPI) => {
     const url = API_ROUTES.REQUEST.route
     const dispatch = thunkAPI.dispatch;
+    const state = (thunkAPI.getState() as RootState).chatReducer
 
     dispatch(setIsComposeAvailable(false))
 
@@ -28,6 +35,16 @@ export const requestChat = createAsyncThunk(
         .then((response) => {
           if (response.status === 200 && response?.data?.result) {
             localStorage.setItem(CUID, response?.data?.result?.cuid)
+
+            dispatch(addNewMessage({
+              id: window.crypto.randomUUID(),
+              time: _args.messageID,
+              username: state.inf.name,
+              message: response?.data?.result?.text?.value,
+              isOwner: false,
+              userAvatar: BOT_DEFAULT_AVATAR,
+            }))
+
           }
           console.log(response);
         })

@@ -3,7 +3,7 @@ import {FC, useEffect} from "react";
 import ChatHeader from "../ChatHeader/ChatHeader";
 import ChatList from "../ChatList/ChatList";
 import ChatCompose from "../ChatCompose/ChatCompose";
-import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
+import {useAppDispatch, useAppSelector} from "@/hooks/redux";
 import {
   chatMessages,
   chatLoadingMessage,
@@ -15,6 +15,12 @@ import {UUID} from "@/constants/api";
 import { classNames } from "@/helpers";
 import Loader from "@/components/ui/Loader/Loader";
 import {requestChat} from "@/store/reducers/chat/thunks/chatRequest";
+import {
+  addNewMessage,
+} from "@/store/reducers/chat/chatSlice";
+import {
+  USER_DEFAULT_AVATAR,
+} from "@/constants/mock";
 
 interface IChat {
   isVisible?: boolean;
@@ -37,13 +43,21 @@ const Chat: FC<IChat> = () => {
   }, [])
 
   const onCompose = (composeTextValue: string) => {
-    if (composeTextValue.trim().length === 0) return
+    let newTime = new Date().getTime()
 
-    console.log('Click compose - ', composeTextValue)
+    dispatch(addNewMessage({
+      id: window.crypto.randomUUID(),
+      time: newTime,
+      username: 'You',
+      message: composeTextValue,
+      isOwner: true,
+      userAvatar: USER_DEFAULT_AVATAR,
+    }))
 
     dispatch(requestChat({
       cuid: localStorage.getItem('chatCUID') ?? '',
       text: composeTextValue,
+      messageID: newTime,
     }))
   }
 
@@ -53,7 +67,7 @@ const Chat: FC<IChat> = () => {
     <div className={chatClasses}>
       <div className={cls.root__inner}>
         <ChatHeader
-          title="AI Chatbot Jarvis"
+          title="AI Chatbot"
         />
         {
           isChatLoading &&

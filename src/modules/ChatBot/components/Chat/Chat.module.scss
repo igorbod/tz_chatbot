@@ -1,7 +1,10 @@
 @use "@/assets/scss/variables" as global_vars;
 
+$chat-window-max-width: 120rem;
+
 .root {
-  width: 60%;
+  width: 100%;
+  max-width: $chat-window-max-width;
   height: 80%;
   border-radius: global_vars.$border-radius-default;
   background-color: global_vars.$main-black-light;

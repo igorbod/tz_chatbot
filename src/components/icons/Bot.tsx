@@ -1,6 +1,6 @@
 import {FC} from "react";
-import {Icon} from "@types/Icon";
-import {DEFAULT_ICONS_SETTINGS} from "@constants/main";
+import {Icon} from "@/types/Icon";
+import {DEFAULT_ICONS_SETTINGS} from "@/constants/main";
 
 const Bot: FC<Icon> = (props) => {
 

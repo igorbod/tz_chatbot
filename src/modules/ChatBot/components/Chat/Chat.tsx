@@ -4,11 +4,16 @@ import ChatHeader from "../ChatHeader/ChatHeader";
 import ChatList from "../ChatList/ChatList";
 import ChatCompose from "../ChatCompose/ChatCompose";
 import {useAppDispatch, useAppSelector} from "../../../../hooks/redux";
-import {chatMessages} from "@/store/reducers/chat/selectors";
+import {
+  chatMessages,
+  chatLoadingMessage,
+  chatIsLoading,
+} from "@/store/reducers/chat/selectors";
 import {initChat} from "@/store/reducers/chat/thunks/chatInit";
 import {UUID} from "@/constants/api";
-import {chatIsLoading} from "@/store/reducers/chat/selectors";
 import { classNames } from "@/helpers";
+import Loader from "@/components/ui/Loader/Loader";
+import {CHAT_TITLES} from "../../constants";
 
 
 interface IChat {
@@ -20,6 +25,7 @@ const Chat: FC<IChat> = () => {
   const dispatch = useAppDispatch();
   const messages = useAppSelector(chatMessages);
   const isChatLoading = useAppSelector(chatIsLoading);
+  const chatLoaderMessage = useAppSelector(chatLoadingMessage);
 
   useEffect(() => {
     const cuid = localStorage.getItem('chatCUID') ?? ''
@@ -41,6 +47,12 @@ const Chat: FC<IChat> = () => {
         <ChatHeader
           title="AI Chatbot Jarvis"
         />
+        {
+          isChatLoading &&
+            <div className={cls.root__loader}>
+                <Loader message={chatLoaderMessage} />
+            </div>
+        }
         <ChatList messages={messages} />
         <ChatCompose
           onCompose={onCompose}

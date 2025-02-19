@@ -1,10 +1,11 @@
 import {SLICES_NAMES} from "@/constants/store";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {API_ROUTES} from "@/constants/api";
-import { $api } from "@/api/api";
+import {$api} from "@/api/api";
 import {DELAYS} from "@/constants/main";
 import {CUID} from "@/constants/localStorage";
-import {setIsLoading} from "../chatSlice";
+import {setIsLoading, setLoadingMessage} from "../chatSlice";
+import {CHAT_TITLES} from "@/modules/ChatBot/constants";
 
 const slicePrefix = SLICES_NAMES.CHAT
 
@@ -29,7 +30,6 @@ export const initChat = createAsyncThunk(
           if (response.status === 200 && response?.data?.result) {
             localStorage.setItem(CUID, response?.data?.result?.cuid)
           }
-         console.log(response);
         })
         .catch((error) => {
           console.error(error);
@@ -37,6 +37,6 @@ export const initChat = createAsyncThunk(
         .finally(() => {
           dispatch(setIsLoading(false))
         })
-    }, DELAYS.LONG)
+    }, DELAYS.DEFAULT)
   }
 )

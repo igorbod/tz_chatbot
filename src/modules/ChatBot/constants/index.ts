@@ -1,5 +1,5 @@
 export const CHAT_TITLES = {
-  INIT: 'Initialize chatbot...',
+  INIT: 'Initializing chatbot...',
   LOADING: 'Loading chatbot...',
   RESTORE: 'Restoring last session...',
 }

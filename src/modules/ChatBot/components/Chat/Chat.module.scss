@@ -10,6 +10,10 @@ $chat-window-max-width: 120rem;
   background-color: global_vars.$main-black-light;
   padding: 3rem;
 
+  @media (max-width: 576px) {
+    padding: 1.5rem;
+  }
+
   &_loading {
     .root__inner {
       /*opacity: .75;

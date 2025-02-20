@@ -44,5 +44,9 @@
     line-height: 1;
     font-weight: 500;
     color: global_vars.$txt-white;
+
+    @media (max-width: 576px) {
+      font-size: 1.2rem;
+    }
   }
 }

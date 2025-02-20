@@ -29,5 +29,8 @@
 
   &__sendButton {
     min-width: 15rem;
+    @media (max-width: 576px) {
+      min-width: 7.5rem;
+    }
   }
 }

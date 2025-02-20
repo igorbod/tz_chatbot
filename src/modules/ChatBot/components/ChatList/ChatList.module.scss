@@ -1,0 +1,26 @@
+@use "@/assets/scss/variables" as global_vars;
+
+.root {
+  position: relative;
+  flex-grow: 1;
+  width: 100%;
+  background-color: global_vars.$main-black;
+  border-radius: 1rem;
+  padding: 3rem;
+  overflow-y: auto;
+  box-shadow: global_vars.$box-shadow-inner;
+
+  @media (max-width: 1024px) {
+    padding: 1.5rem;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    grid-row-gap: 2rem;
+    padding-bottom: 3rem;
+    @media (max-width: 1024px) {
+      padding-bottom: 1.5rem;
+    }
+  }
+}

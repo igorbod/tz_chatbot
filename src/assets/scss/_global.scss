@@ -1,0 +1,61 @@
+@use 'variables' as vars;
+
+/* Global styles */
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 1.6rem;
+  font-family: vars.$font-default;
+  font-weight: 400;
+  color: vars.$txt-white;
+  background-color: vars.$main-black;
+  padding: 0;
+  margin: 0;
+}
+
+*,
+html *
+{
+  scrollbar-width: thin;
+  scrollbar-color: vars.$custom-scrollbar-pointer vars.$custom-scrollbar-bg;
+}
+
+/* Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  height: 1.2rem;
+  width: 1.2rem;
+}
+*::-webkit-scrollbar-track {
+  background: vars.$custom-scrollbar-bg;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: vars.$custom-scrollbar-pointer;
+  border-radius: .5rem;
+  border: .3rem solid vars.$custom-scrollbar-bg;
+}
+
+#root {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.p0 {
+  padding: 0;
+}
+
+.m0 {
+  margin: 0;
+}

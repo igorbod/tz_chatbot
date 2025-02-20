@@ -108,11 +108,14 @@ export const mainSlice = createSlice({
         state.isComposeAvailable = true
       })
       .addCase(initChat.rejected, (state, action) => {
-        console.log('initChat.rejected - ', action)
         state.isLoading = false
         state.isComposeAvailable = true
         state.isChatInitialized = false
+
+
+        // @ts-ignore
         toast.error(action?.payload?.message ?? DEFAULT_MESSAGES.ERROR)
+
       })
 
       /* EVENT CHAT */
@@ -139,6 +142,7 @@ export const mainSlice = createSlice({
       })
       .addCase(eventChat.rejected, (state, action) => {
         state.isComposeAvailable = true
+        // @ts-ignore
         toast.error(action?.payload?.message ?? DEFAULT_MESSAGES.ERROR)
       })
 
@@ -166,6 +170,7 @@ export const mainSlice = createSlice({
       })
       .addCase(requestChat.rejected, (state, action) => {
         state.isComposeAvailable = true
+        // @ts-ignore
         toast.error(action?.payload?.message ?? DEFAULT_MESSAGES.ERROR)
       })
   },

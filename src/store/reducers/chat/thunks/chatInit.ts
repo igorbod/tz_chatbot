@@ -13,7 +13,7 @@ interface IChatInitParams {
 
 export const initChat = createAsyncThunk(
   slicePrefix + '/initChat',
-  async(args: IChatInitParams, thunkAPI) => {
+  async (args: IChatInitParams, thunkAPI) => {
     const url = API_ROUTES.INIT.route
     try {
       const response = await $api.post(url, args)

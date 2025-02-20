@@ -13,7 +13,7 @@ interface IChatRequestParams {
 
 export const requestChat = createAsyncThunk(
   slicePrefix + '/requestChat',
-  async(args: IChatRequestParams, thunkAPI) => {
+  async (args: IChatRequestParams, thunkAPI) => {
     const url = API_ROUTES.REQUEST.route
 
     try {
